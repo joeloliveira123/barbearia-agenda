@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sua Barbearia | Corte, Barba e Agendamento Online</title>
+    <meta
+      name="description"
+      content="Site e agendamento online exclusivo para Sua Barbearia. Personalize com o nome da sua barbearia, serviços, clube mensal e agenda sem fila."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- BARRA DE AUTONOMIA DO DONO -->
+    <div class="owner-bar">
+      <div class="container owner-bar-inner">
+        <label for="quick-shop-name" class="owner-prompt">
+          Coloque o nome da <strong>Sua Barbearia</strong> e veja este site com a sua marca:
+        </label>
+        <div class="owner-controls">
+          <input
+            type="text"
+            id="quick-shop-name"
+            placeholder="Ex: Barbearia Dom Pedro"
+            aria-label="Nome da sua barbearia"
+          />
+          <button id="open-customizer" type="button" class="btn-owner-edit">
+            Personalizar Barbearia
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CABEÇALHO -->
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="#topo" class="brand">
+          <div class="brand-mark" id="shop-logo" aria-hidden="true">SB</div>
+          <div>
+            <div class="brand-name" id="shop-name">Sua Barbearia</div>
+            <div class="brand-meta" id="shop-sub">Barbearia Clássica &amp; Visagismo</div>
+          </div>
+        </a>
+
+        <nav class="main-nav" aria-label="Seções do site">
+          <a href="#sobre">A Casa</a>
+          <a href="#servicos">Serviços</a>
+          <a href="#clube">Clube Mensal</a>
+          <a href="#barbeiros">Barbeiros</a>
+        </nav>
+
+        <div class="view-switch" role="tablist" aria-label="Alternar visão">
+          <button class="switch-btn active" data-view="client" role="tab" aria-selected="true">
+            Visão do Cliente
+          </button>
+          <button class="switch-btn" data-view="shop" role="tab" aria-selected="false">
+            Painel da Sua Barbearia <span class="count-pill" id="shop-badge">0</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main id="topo">
+      <!-- VISÃO DO CLIENTE -->
+      <section id="client-view">
+        <!-- HERO -->
+        <div class="hero-section">
+          <div class="container hero-grid">
+            <div>
+              <p class="hero-eyebrow">VISAGISMO · TOALHA QUENTE · ZERO FILA</p>
+              <h1 class="hero-title">
+                Corte preciso e barba na navalha na <span id="hero-shop-span">Sua Barbearia</span>.
+              </h1>
+              <p class="hero-lead">
+                Escolha o serviço, selecione seu barbeiro de confiança e garanta sua cadeira sem
+                esperar no balcão ou no WhatsApp.
+              </p>
+
+              <div class="hero-actions">
+                <a href="#agendar" class="btn-solid">Agendar Meu Horário</a>
+                <a href="#clube" class="btn-ghost">Conhecer Clube Mensal</a>
+              </div>
+
+              <div class="proof-strip">
+                <div class="proof-item">
+                  <strong>4.9 ★</strong>
+                  <span>480+ clientes no Google</span>
+                </div>
+                <div class="proof-divider"></div>
+                <div class="proof-item">
+                  <strong>Ter a Sáb</strong>
+                  <span>09h às 21h · Sem pausa</span>
+                </div>
+                <div class="proof-divider"></div>
+                <div class="proof-item">
+                  <strong>1ª Bebida</strong>
+                  <span>Café ou chopp cortesia</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="hero-card">
+              <div class="hc-top">
+                <span>Avaliação de Cliente</span>
+                <span class="stars">★★★★★</span>
+              </div>
+              <blockquote>
+                “Cheguei no horário marcado, já fui direto pra cadeira com o Lucas. Degradê limpo,
+                toalha quente na barba e atendimento de primeira.”
+              </blockquote>
+              <div class="hc-author">
+                <div class="avatar-dot">RM</div>
+                <div>
+                  <strong>Rodrigo Mendonça</strong>
+                  <span>Assinante do Clube Corte + Barba</span>
+                </div>
+              </div>
+              <div class="hc-address">
+                <span>Endereço:</span>
+                <strong id="shop-address">Rua Augusta, 980 · Vila Nova</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CONTEXTO / A CASA -->
+        <section id="sobre" class="section section-light">
+          <div class="container about-grid">
+            <div>
+              <span class="section-kicker">TRADIÇÃO &amp; ESTILO</span>
+              <h2>
+                A barbearia onde você resolve o visual com calma e sai pronto para qualquer ocasião.
+              </h2>
+            </div>
+            <div>
+              <p class="about-text">
+                Na <strong class="shop-inline-name">Sua Barbearia</strong>, cada atendimento começa
+                entendendo o formato do seu rosto, o caimento do cabelo e a sua rotina. Sem corte
+                padronizado às pressas — você sai com um visual que funciona no dia a dia.
+              </p>
+              <div class="about-points">
+                <div class="about-point">
+                  <strong>Visagismo Real</strong>
+                  <span>Corte pensado para o seu tipo de cabelo e formato de rosto.</span>
+                </div>
+                <div class="about-point">
+                  <strong>Barba Terapia</strong>
+                  <span>Toalha quente, óleo essencial, navalha descartável e pós-barba calmante.</span>
+                </div>
+                <div class="about-point">
+                  <strong>Pontualidade</strong>
+                  <span>Agenda online sincronizada para você não perder tempo esperando.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SERVIÇOS -->
+        <section id="servicos" class="section">
+          <div class="container">
+            <div class="section-head">
+              <div>
+                <span class="section-kicker">TABELA DE SERVIÇOS</span>
+                <h2>Escolha seu Serviço na <span class="shop-inline-name">Sua Barbearia</span></h2>
+              </div>
+              <div class="cat-tabs" role="tablist" aria-label="Filtrar serviços">
+                <button class="cat-tab active" data-cat="all">Todos</button>
+                <button class="cat-tab" data-cat="Cabelo">Cabelo</button>
+                <button class="cat-tab" data-cat="Barba">Barba</button>
+                <button class="cat-tab" data-cat="Combos">Combos</button>
+              </div>
+            </div>
+
+            <div id="services-grid" class="services-grid"></div>
+          </div>
+        </section>
+
+        <!-- AGENDAMENTO -->
+        <section id="agendar" class="section section-light">
+          <div class="container">
+            <div class="section-head">
+              <div>
+                <span class="section-kicker">AGENDA ONLINE</span>
+                <h2>Reserve sua Cadeira</h2>
+              </div>
+            </div>
+
+            <div class="booking-grid">
+              <div class="booking-left">
+                <div class="booking-block">
+                  <h3>1. Escolha seu Barbeiro</h3>
+                  <div id="barbers-list" class="barbers-grid"></div>
+                </div>
+
+                <div class="booking-block">
+                  <h3>2. Escolha o Dia e o Horário</h3>
+                  <div id="days-grid" class="days-grid"></div>
+                  <div id="slots-grid" class="slots-grid"></div>
+                </div>
+              </div>
+
+              <aside class="checkout-card" aria-labelledby="checkout-heading">
+                <h3 id="checkout-heading">Seu Agendamento</h3>
+
+                <div class="checkout-summary">
+                  <div class="cs-line">
+                    <span>Serviço</span>
+                    <strong id="sum-service">Selecione ao lado</strong>
+                  </div>
+                  <div class="cs-line">
+                    <span>Barbeiro</span>
+                    <strong id="sum-barber">—</strong>
+                  </div>
+                  <div class="cs-line">
+                    <span>Data e Hora</span>
+                    <strong id="sum-datetime">Escolha o horário</strong>
+                  </div>
+                  <div class="cs-total">
+                    <span>Valor</span>
+                    <strong id="sum-price">R$ 0,00</strong>
+                  </div>
+                </div>
+
+                <form id="client-form" class="checkout-form">
+                  <div class="field">
+                    <label for="c-name">Seu Nome</label>
+                    <input type="text" id="c-name" required placeholder="Ex: Rafael Oliveira" />
+                  </div>
+                  <div class="field">
+                    <label for="c-phone">Seu WhatsApp</label>
+                    <input type="tel" id="c-phone" required placeholder="(11) 99999-9999" />
+                  </div>
+                  <div class="field">
+                    <label for="c-notes">Preferência (opcional)</label>
+                    <input type="text" id="c-notes" placeholder="Ex: Degradê baixo, barba alinhada..." />
+                  </div>
+                  <p id="form-error" class="form-error hidden"></p>
+                  <button type="submit" class="btn-solid btn-full">Confirmar Horário</button>
+                </form>
+
+                <div id="booking-success" class="booking-success hidden">
+                  <div class="check-circle" aria-hidden="true">✓</div>
+                  <h4>Cadeira Reservada!</h4>
+                  <p id="success-text"></p>
+                  <a id="wa-btn" href="#" target="_blank" rel="noopener noreferrer" class="btn-whatsapp">
+                    Confirmar no WhatsApp
+                  </a>
+                  <button id="another-btn" type="button" class="btn-link">Agendar outro horário</button>
+                </div>
+              </aside>
+            </div>
+          </div>
+        </section>
+
+        <!-- CLUBE MENSAL -->
+        <section id="clube" class="section">
+          <div class="container">
+            <div class="section-head">
+              <div>
+                <span class="section-kicker">ASSINATURA MENSAL</span>
+                <h2>Clube da <span class="shop-inline-name">Sua Barbearia</span></h2>
+              </div>
+            </div>
+
+            <div class="club-grid">
+              <article class="club-card">
+                <span class="club-tag">PLANO CORTE</span>
+                <h3>Corte Ilimitado</h3>
+                <div class="club-price">R$ 89<span>/mês</span></div>
+                <p>Mantenha o degradê e o acabamento sempre em dia, quantas vezes quiser no mês.</p>
+                <ul>
+                  <li>Cortes ilimitados de terça a sexta</li>
+                  <li>Lavagem e finalização incluídas</li>
+                  <li>Sem fidelidade ou multa de cancelamento</li>
+                </ul>
+              </article>
+
+              <article class="club-card club-featured">
+                <span class="club-tag">MAIS ESCOLHIDO</span>
+                <h3>Corte + Barba Ilimitado</h3>
+                <div class="club-price">R$ 149<span>/mês</span></div>
+                <p>O pacote completo para quem precisa estar alinhado toda semana sem pagar avulso.</p>
+                <ul>
+                  <li>Cortes e Barba Terapia ilimitados</li>
+                  <li>Prioridade nos horários de sexta e sábado</li>
+                  <li>10% de desconto em pomadas e óleos</li>
+                </ul>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <!-- BARBEIROS -->
+        <section id="barbeiros" class="section section-light">
+          <div class="container">
+            <div class="section-head">
+              <div>
+                <span class="section-kicker">NOSSO TIME</span>
+                <h2>Conheça os Barbeiros</h2>
+              </div>
+            </div>
+            <div id="team-showcase" class="team-grid"></div>
+          </div>
+        </section>
+      </section>
+
+      <!-- PAINEL DA SUA BARBEARIA -->
+      <section id="shop-view" class="hidden">
+        <div class="container shop-panel-wrap">
+          <div class="shop-panel-head">
+            <span class="section-kicker">GESTÃO EM TEMPO REAL</span>
+            <h2>Painel da Sua Barbearia — <span id="admin-shop-name">Sua Barbearia</span></h2>
+            <p>Gerencie os horários marcados pelo site, confirme clientes e acompanhe o faturamento.</p>
+          </div>
+
+          <div class="kpi-strip">
+            <div class="kpi">
+              <span>Reservas Ativas</span>
+              <strong id="kpi-active">0</strong>
+            </div>
+            <div class="kpi">
+              <span>Confirmados</span>
+              <strong id="kpi-confirmed">0</strong>
+            </div>
+            <div class="kpi">
+              <span>Aguardando</span>
+              <strong id="kpi-pending">0</strong>
+            </div>
+            <div class="kpi kpi-accent">
+              <span>Faturamento Previsto</span>
+              <strong id="kpi-revenue">R$ 0,00</strong>
+            </div>
+          </div>
+
+          <div class="clients-card">
+            <div class="clients-head">
+              <h3>Seus Clientes Agendados</h3>
+              <div class="status-filters">
+                <button class="filter-chip active" data-status="all">Todos</button>
+                <button class="filter-chip" data-status="Confirmado">Confirmados</button>
+                <button class="filter-chip" data-status="Pendente">Pendentes</button>
+                <button class="filter-chip" data-status="Cancelado">Cancelados</button>
+              </div>
+            </div>
+            <div id="agenda-list" class="agenda-list"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- DRAWER DE PERSONALIZAÇÃO -->
+    <aside id="customizer-drawer" class="drawer hidden" aria-label="Personalize sua barbearia">
+      <div class="drawer-backdrop" id="drawer-backdrop"></div>
+      <div class="drawer-panel">
+        <div class="drawer-head">
+          <h3>Personalize Sua Barbearia</h3>
+          <button id="close-customizer" class="drawer-close" aria-label="Fechar">✕</button>
+        </div>
+
+        <div class="drawer-body">
+          <div class="field">
+            <label for="cfg-name">Nome da Sua Barbearia</label>
+            <input type="text" id="cfg-name" />
+          </div>
+          <div class="field">
+            <label for="cfg-sub">Estilo / Slogan Curto</label>
+            <input type="text" id="cfg-sub" />
+          </div>
+          <div class="field">
+            <label for="cfg-address">Endereço</label>
+            <input type="text" id="cfg-address" />
+          </div>
+          <div class="field">
+            <label for="cfg-whatsapp">WhatsApp da Sua Barbearia</label>
+            <input type="text" id="cfg-whatsapp" placeholder="5511999999999" />
+          </div>
+          <div class="field">
+            <label>Cor Principal</label>
+            <div class="color-row">
+              <input type="color" id="cfg-color" />
+              <button type="button" class="swatch" data-color="#C97A34" style="background:#C97A34" aria-label="Cobre"></button>
+              <button type="button" class="swatch" data-color="#B91C1C" style="background:#B91C1C" aria-label="Vermelho Clássico"></button>
+              <button type="button" class="swatch" data-color="#1D4ED8" style="background:#1D4ED8" aria-label="Azul"></button>
+              <button type="button" class="swatch" data-color="#0F766E" style="background:#0F766E" aria-label="Verde"></button>
+            </div>
+          </div>
+
+          <hr class="divider" />
+
+          <div class="field">
+            <label>Adicione seu Serviço</label>
+            <div class="add-grid">
+              <input type="text" id="new-svc-name" placeholder="Nome do serviço" />
+              <input type="number" id="new-svc-price" placeholder="Preço (R$)" min="1" />
+              <input type="number" id="new-svc-dur" placeholder="Minutos" min="15" step="5" value="40" />
+              <button type="button" id="add-svc-btn" class="btn-solid btn-full">Adicionar à Lista</button>
+            </div>
+          </div>
+
+          <button type="button" id="reset-btn" class="btn-reset">Restaurar Padrão</button>
+        </div>
+      </div>
+    </aside>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <span><strong id="footer-name">Sua Barbearia</strong> · <span id="footer-address">Rua Augusta, 980</span></span>
+        <span>Desenvolvido por <strong>Joel Oliveira.</strong></span>
+      </div>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>
