@@ -35,59 +35,53 @@ const DEFAULT_SHOP = {
       id: "s1",
       category: "Cabelo",
       categoryLabel: "Cabelo",
-      name: "Corte Masculino Visagista",
-      desc: "Análise do formato do rosto, corte personalizado na máquina e tesoura, lavagem e finalização com pomada.",
-      why: "Você não recebe um corte genérico: ajustamos volume e contorno para o cabelo assentar bem até crescer.",
+      name: "Corte Masculino",
+      desc: "Você escolhe o estilo — degradê, social ou tesoura. Fazemos o corte alinhado ao seu cabelo, lavamos e finalizamos com pomada.",
       price: 40,
-      duration: 40
+      duration: 30
     },
     {
       id: "s2",
-      category: "Cabelo",
-      categoryLabel: "Combo Cabelo",
-      name: "Corte + Sobrancelha",
-      desc: "Corte completo na máquina ou tesoura com alinhamento limpo da sobrancelha na navalha ou pinça.",
-      why: "Visual completo e alinhado em uma única passada na cadeira, sem perder o aspecto natural.",
-      price: 50,
-      duration: 45
+      category: "Barba",
+      categoryLabel: "Rosto",
+      name: "Sobrancelha na Navalha ou Pinça",
+      desc: "Limpeza rápida do contorno e entre as sobrancelhas para deixar o olhar mais limpo, sem afinar nem perder o desenho natural.",
+      price: 10,
+      duration: 10
     },
     {
       id: "s3",
       category: "Barba",
       categoryLabel: "Barba",
       name: "Barba Terapia com Toalha Quente",
-      desc: "Alinhamento completo na navalha, duas toalhas quentes aromáticas, esfoliação leve e óleo hidratante.",
-      why: "Ritual completo que abre os poros, evita irritação na pele e deixa a barba macia o dia inteiro.",
+      desc: "Desenho na navalha com duas toalhas quentes aromáticas, esfoliação leve e óleo hidratante para evitar irritação na pele.",
       price: 35,
-      duration: 30
+      duration: 20
     },
     {
       id: "s4",
       category: "Combos",
       categoryLabel: "Combo",
       name: "Combo Corte + Barba Completa",
-      desc: "O pacote mais pedido: corte completo + Barba Terapia na navalha com toalha quente e pós-barba.",
-      why: "Economia no combo e visual 100% alinhado em uma única hora marcada na cadeira.",
+      desc: "Cabelo do jeito que você pediu combinado com a Barba Terapia completa na toalha quente em um único atendimento.",
       price: 70,
-      duration: 60
+      duration: 50
     },
     {
       id: "s5",
       category: "Cabelo",
       categoryLabel: "Tratamento",
       name: "Hidratação & Secagem Modelada",
-      desc: "Hidratação rápida para reduzir frizz, alinhar fios ressecados e finalizar com secagem e pomada.",
-      why: "Produtos masculinos de efeito natural que devolvem maciez sem deixar o cabelo oleoso.",
+      desc: "Para tirar o ressecamento e controlar o volume: aplicação rápida no lavatório seguida de secagem e modelagem.",
       price: 40,
-      duration: 30
+      duration: 25
     },
     {
       id: "s6",
       category: "Barba",
       categoryLabel: "Acabamento",
       name: "Pezinho & Contorno",
-      desc: "Manutenção rápida entre um corte e outro para manter o contorno da nuca e costeletas limpos.",
-      why: "Encaixe ágil de 15 minutos para você manter a régua em dia para reuniões ou eventos.",
+      desc: "Manutenção rápida para limpar a nuca, o contorno da orelha e o desenho da barba entre um corte e outro.",
       price: 20,
       duration: 15
     }
@@ -95,8 +89,8 @@ const DEFAULT_SHOP = {
 };
 
 const SLOTS = ["09:00", "09:40", "10:20", "11:00", "13:30", "14:15", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00"];
-const CFG_KEY = "barbearia_mvp_cfg_v2";
-const BKG_KEY = "barbearia_mvp_bkg_v2";
+const CFG_KEY = "barbearia_mvp_cfg_v3";
+const BKG_KEY = "barbearia_mvp_bkg_v3";
 
 function buildDays() {
   const days = [];
@@ -136,8 +130,8 @@ function loadShopBookings(cfg) {
       id: "r1",
       clientName: "Gabriel Souza",
       clientPhone: "(11) 99123-4455",
-      serviceName: cfg.services[2].name,
-      price: cfg.services[2].price,
+      serviceName: cfg.services[3].name,
+      price: cfg.services[3].price,
       barberName: cfg.barbers[0].name,
       date: DAYS[0].iso,
       dateLabel: `${DAYS[0].label} (${DAYS[0].shortDate})`,
@@ -148,8 +142,8 @@ function loadShopBookings(cfg) {
       id: "r2",
       clientName: "Matheus Prado",
       clientPhone: "(11) 98234-7788",
-      serviceName: cfg.services[0].name,
-      price: cfg.services[0].price,
+      serviceName: `${cfg.services[0].name} + ${cfg.services[1].name}`,
+      price: cfg.services[0].price + cfg.services[1].price,
       barberName: cfg.barbers[1].name,
       date: DAYS[0].iso,
       dateLabel: `${DAYS[0].label} (${DAYS[0].shortDate})`,
@@ -161,7 +155,7 @@ function loadShopBookings(cfg) {
 
 let shop = loadShopConfig();
 let bookings = loadShopBookings(shop);
-let selectedService = shop.services[0];
+let selectedServices = [shop.services[0]];
 let selectedBarber = shop.barbers[0];
 let selectedDay = DAYS[0];
 let selectedSlot = null;
@@ -189,6 +183,13 @@ function initials(name) {
   const parts = name.trim().split(/\s+/);
   if (parts.length >= 2) return (parts[0][0] + parts[1][0]).toUpperCase();
   return name.slice(0, 2).toUpperCase() || "SB";
+}
+
+function getTotals() {
+  const totalPrice = selectedServices.reduce((sum, s) => sum + Number(s.price || 0), 0);
+  const totalDuration = selectedServices.reduce((sum, s) => sum + Number(s.duration || 0), 0);
+  const names = selectedServices.map((s) => s.name).join(" + ");
+  return { totalPrice, totalDuration, names };
 }
 
 function applyShopBrand() {
@@ -222,43 +223,55 @@ function applyShopBrand() {
 }
 
 function updateSummary() {
-  document.getElementById("sum-service").textContent = selectedService ? selectedService.name : "Selecione ao lado";
+  const { totalPrice, totalDuration, names } = getTotals();
+  const count = selectedServices.length;
+
+  document.getElementById("sum-service").textContent = count > 0 ? names : "Selecione ao lado";
+  document.getElementById("sum-duration").textContent = count > 0 ? `~${totalDuration} min` : "—";
   document.getElementById("sum-barber").textContent = selectedBarber ? selectedBarber.name : "—";
   document.getElementById("sum-datetime").textContent = selectedSlot
     ? `${selectedDay.label} (${selectedDay.shortDate}) às ${selectedSlot}`
     : `${selectedDay.label} · escolha o horário`;
-  document.getElementById("sum-price").textContent = selectedService ? formatBRL(selectedService.price) : "R$ 0,00";
+  document.getElementById("sum-price").textContent = formatBRL(totalPrice);
+
+  const inlineEl = document.getElementById("selected-summary-inline");
+  if (count === 0) {
+    inlineEl.textContent = "Nenhum serviço selecionado — clique nos cartões acima para montar seu atendimento";
+  } else {
+    const label = count === 1 ? "1 serviço selecionado" : `${count} serviços selecionados`;
+    inlineEl.textContent = `${label} · ~${totalDuration} min · ${formatBRL(totalPrice)}`;
+  }
 }
 
 function renderServices() {
   const grid = document.getElementById("services-grid");
   grid.innerHTML = "";
   const list = shop.services.filter((s) => serviceCat === "all" || s.category === serviceCat);
+  const selectedIds = new Set(selectedServices.map((s) => s.id));
 
   list.forEach((s) => {
+    const isSelected = selectedIds.has(s.id);
     const card = document.createElement("div");
-    card.className = `service-card${selectedService?.id === s.id ? " selected" : ""}`;
+    card.className = `service-card${isSelected ? " selected" : ""}`;
     card.innerHTML = `
       <div>
         <span class="service-cat">${s.categoryLabel}</span>
         <h3>${s.name}</h3>
         <p>${s.desc}</p>
-        ${
-          s.why
-            ? `<div class="service-why"><strong>Por que na ${shop.name}?</strong>${s.why}</div>`
-            : ""
-        }
       </div>
       <div class="service-foot">
-        <span class="service-price">${formatBRL(s.price)}</span>
-        <span>${s.duration} min · Agendar este serviço →</span>
+        <span class="service-price">${formatBRL(s.price)} · ~${s.duration} min</span>
+        <span class="service-toggle-pill">${isSelected ? "Selecionado ✓" : "Adicionar +"}</span>
       </div>
     `;
     card.addEventListener("click", () => {
-      selectedService = s;
+      if (selectedIds.has(s.id)) {
+        selectedServices = selectedServices.filter((item) => item.id !== s.id);
+      } else {
+        selectedServices = [...selectedServices, s];
+      }
       renderServices();
       updateSummary();
-      document.getElementById("agendar").scrollIntoView({ behavior: "smooth" });
     });
     grid.appendChild(card);
   });
@@ -427,8 +440,8 @@ document.getElementById("quick-shop-name").addEventListener("input", (e) => {
 document.getElementById("client-form").addEventListener("submit", (e) => {
   e.preventDefault();
   const errEl = document.getElementById("form-error");
-  if (!selectedService || !selectedSlot) {
-    errEl.textContent = "Escolha o serviço e um horário disponível antes de confirmar.";
+  if (selectedServices.length === 0 || !selectedSlot) {
+    errEl.textContent = "Selecione pelo menos um serviço e um horário disponível antes de confirmar.";
     errEl.classList.remove("hidden");
     return;
   }
@@ -437,14 +450,16 @@ document.getElementById("client-form").addEventListener("submit", (e) => {
   const clientName = document.getElementById("c-name").value.trim();
   const clientPhone = document.getElementById("c-phone").value.trim();
   const notes = document.getElementById("c-notes").value.trim();
+  const { totalPrice, totalDuration, names } = getTotals();
 
   const record = {
     id: "r" + Date.now(),
     clientName,
     clientPhone,
     notes,
-    serviceName: selectedService.name,
-    price: selectedService.price,
+    serviceName: names,
+    price: totalPrice,
+    duration: totalDuration,
     barberName: selectedBarber.name,
     date: selectedDay.iso,
     dateLabel: `${selectedDay.label} (${selectedDay.shortDate})`,
@@ -458,12 +473,12 @@ document.getElementById("client-form").addEventListener("submit", (e) => {
   renderAgenda();
 
   const msg = encodeURIComponent(
-    `Olá *${shop.name}*! Acabei de reservar meu horário pelo site:\n• Serviço: ${record.serviceName}\n• Barbeiro: ${record.barberName}\n• Data: ${record.dateLabel} às ${record.time}\n• Cliente: ${record.clientName}`
+    `Olá *${shop.name}*! Acabei de reservar meu horário pelo site:\n• Serviços: ${record.serviceName}\n• Tempo estimado: ~${record.duration} min\n• Barbeiro: ${record.barberName}\n• Data: ${record.dateLabel} às ${record.time}\n• Cliente: ${record.clientName}`
   );
   const wa = shop.whatsapp.replace(/\D/g, "") || "5511999999999";
 
   document.getElementById("success-text").textContent =
-    `${record.serviceName} com ${record.barberName} em ${record.dateLabel} às ${record.time}.`;
+    `${record.serviceName} (~${record.duration} min) com ${record.barberName} em ${record.dateLabel} às ${record.time}.`;
   document.getElementById("wa-btn").href = `https://wa.me/${wa}?text=${msg}`;
 
   document.getElementById("client-form").classList.add("hidden");
@@ -530,19 +545,19 @@ document.querySelectorAll(".swatch").forEach((sw) => {
 document.getElementById("add-svc-btn").addEventListener("click", () => {
   const name = document.getElementById("new-svc-name").value.trim();
   const price = Number(document.getElementById("new-svc-price").value);
-  const duration = Number(document.getElementById("new-svc-dur").value) || 40;
+  const duration = Number(document.getElementById("new-svc-dur").value) || 30;
   if (!name || !price) return;
-  shop.services.unshift({
+  const newSvc = {
     id: "s" + Date.now(),
     category: "Combos",
     categoryLabel: "Personalizado",
     name,
-    desc: "Serviço personalizado da sua barbearia.",
-    why: "Atendimento exclusivo com a qualidade da sua equipe.",
+    desc: "Serviço adicionado especialmente para o seu atendimento.",
     price,
     duration
-  });
-  selectedService = shop.services[0];
+  };
+  shop.services.unshift(newSvc);
+  selectedServices = [...selectedServices, newSvc];
   document.getElementById("new-svc-name").value = "";
   document.getElementById("new-svc-price").value = "";
   persist();
@@ -552,7 +567,7 @@ document.getElementById("add-svc-btn").addEventListener("click", () => {
 
 document.getElementById("reset-btn").addEventListener("click", () => {
   shop = structuredClone(DEFAULT_SHOP);
-  selectedService = shop.services[0];
+  selectedServices = [shop.services[0]];
   selectedBarber = shop.barbers[0];
   selectedSlot = null;
   persist();

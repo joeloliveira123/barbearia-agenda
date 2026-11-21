@@ -427,6 +427,47 @@ body {
   line-height: 1.15;
 }
 
+.section-sub {
+  margin: 0.45rem 0 0;
+  color: #C7BFB5;
+  font-size: 0.94rem;
+  max-width: 58ch;
+}
+
+.services-cta-bar {
+  margin-top: 1.35rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius-md);
+  background: var(--charcoal-card);
+  border: 1px solid var(--border-dark);
+}
+
+.selected-inline-text {
+  font-size: 0.94rem;
+  color: #F5F0E8;
+  font-weight: 600;
+}
+
+.service-toggle-pill {
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 0.24rem 0.65rem;
+  border-radius: 999px;
+  border: 1px solid var(--border-dark);
+  color: #E7E0D8;
+}
+
+.service-card.selected .service-toggle-pill {
+  background: var(--brand);
+  border-color: var(--brand);
+  color: #FFFFFF;
+}
+
 /* ABOUT */
 .about-grid {
   display: grid;

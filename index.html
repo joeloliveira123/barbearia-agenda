@@ -73,7 +73,6 @@
         <div class="hero-section">
           <div class="container hero-grid">
             <div>
-              <p class="hero-eyebrow">VISAGISMO · TOALHA QUENTE · ZERO FILA</p>
               <h1 class="hero-title">
                 Corte preciso e barba na navalha na <span id="hero-shop-span">Sua Barbearia</span>.
               </h1>
@@ -167,18 +166,28 @@
           <div class="container">
             <div class="section-head">
               <div>
-                <span class="section-kicker">TABELA DE SERVIÇOS</span>
-                <h2>Escolha seu Serviço na <span class="shop-inline-name">Sua Barbearia</span></h2>
+                <span class="section-kicker">MONTE SEU ATENDIMENTO</span>
+                <h2>O que vamos fazer hoje?</h2>
+                <p class="section-sub">
+                  Selecione um ou mais serviços abaixo para combinar exatamente o que você quer fazer.
+                </p>
               </div>
               <div class="cat-tabs" role="tablist" aria-label="Filtrar serviços">
                 <button class="cat-tab active" data-cat="all">Todos</button>
                 <button class="cat-tab" data-cat="Cabelo">Cabelo</button>
-                <button class="cat-tab" data-cat="Barba">Barba</button>
+                <button class="cat-tab" data-cat="Barba">Barba &amp; Rosto</button>
                 <button class="cat-tab" data-cat="Combos">Combos</button>
               </div>
             </div>
 
             <div id="services-grid" class="services-grid"></div>
+
+            <div class="services-cta-bar">
+              <div id="selected-summary-inline" class="selected-inline-text">
+                1 serviço selecionado · ~30 min · R$ 40,00
+              </div>
+              <a href="#agendar" class="btn-solid">Escolher Barbeiro e Horário →</a>
+            </div>
           </div>
         </section>
 
@@ -211,8 +220,12 @@
 
                 <div class="checkout-summary">
                   <div class="cs-line">
-                    <span>Serviço</span>
+                    <span>Serviços</span>
                     <strong id="sum-service">Selecione ao lado</strong>
+                  </div>
+                  <div class="cs-line">
+                    <span>Tempo estimado</span>
+                    <strong id="sum-duration">—</strong>
                   </div>
                   <div class="cs-line">
                     <span>Barbeiro</span>
@@ -223,7 +236,7 @@
                     <strong id="sum-datetime">Escolha o horário</strong>
                   </div>
                   <div class="cs-total">
-                    <span>Valor</span>
+                    <span>Valor Total</span>
                     <strong id="sum-price">R$ 0,00</strong>
                   </div>
                 </div>
