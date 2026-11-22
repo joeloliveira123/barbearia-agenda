@@ -91,6 +91,11 @@ const DEFAULT_SHOP = {
 const SLOTS = ["09:00", "09:40", "10:20", "11:00", "13:30", "14:15", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00"];
 const CFG_KEY = "barbearia_mvp_cfg_v3";
 const BKG_KEY = "barbearia_mvp_bkg_v3";
+const BARBER_PHOTOS = {
+  b1: "images/barber-lucas.webp",
+  b2: "images/barber-bruno.webp",
+  b3: "images/barber-thiago.webp"
+};
 
 function buildDays() {
   const days = [];
@@ -284,10 +289,23 @@ function renderBarbers() {
   team.innerHTML = "";
 
   shop.barbers.forEach((b) => {
+    const photoUrl = BARBER_PHOTOS[b.id];
+    const avatarHtml = photoUrl
+      ? `<img src="${photoUrl}" alt="" class="barber-avatar-sm" decoding="async" />`
+      : `<span class="barber-avatar-fallback" aria-hidden="true">${initials(b.name)}</span>`;
+
     const btn = document.createElement("button");
     btn.type = "button";
     btn.className = `barber-btn${selectedBarber?.id === b.id ? " selected" : ""}`;
-    btn.innerHTML = `<strong>${b.name}</strong><span>${b.role}</span>`;
+    btn.innerHTML = `
+      <span class="barber-btn-inner">
+        ${avatarHtml}
+        <span>
+          <strong>${b.name}</strong>
+          <span>${b.role}</span>
+        </span>
+      </span>
+    `;
     btn.addEventListener("click", () => {
       selectedBarber = b;
       renderBarbers();
@@ -298,11 +316,17 @@ function renderBarbers() {
     if (b.bio) {
       const card = document.createElement("article");
       card.className = "team-card";
+      const headerMedia = photoUrl
+        ? `<div class="team-photo-wrap"><img src="${photoUrl}" alt="Retrato do barbeiro ${b.name}" class="team-photo" decoding="async" /></div>`
+        : `<div class="team-monogram">${initials(b.name)}</div>`;
+
       card.innerHTML = `
-        <div class="team-monogram">${initials(b.name)}</div>
-        <h3>${b.name}</h3>
-        <span class="team-role">${b.role}</span>
-        <p>${b.bio}</p>
+        ${headerMedia}
+        <div class="team-card-body">
+          <h3>${b.name}</h3>
+          <span class="team-role">${b.role}</span>
+          <p>${b.bio}</p>
+        </div>
       `;
       team.appendChild(card);
     }
